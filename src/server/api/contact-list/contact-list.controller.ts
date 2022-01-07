@@ -1,11 +1,11 @@
 import { Controller, Get } from '@nestjs/common';
 import { ContactListService } from './contact-list.service';
 
-@Controller('contact-list')
+@Controller()
 export class ContactListController {
   constructor(private readonly contactListService: ContactListService) {}
 
-  @Get()
+  @Get('/getContacts')
   getContacts(): Array<any> {
     return this.contactListService.getContacts();
   }
