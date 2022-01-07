@@ -1,15 +1,14 @@
-import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import createServer from 'next/dist/server/next';
-import { AppModule } from './app.module';
-import { HttpExceptionFilter } from './next.filter';
+import { AppModule } from './server/app.module';
+import { HttpExceptionFilter } from './server/next.filter';
+import config from './nest.config.json';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
-  const configService = app.get<ConfigService>(ConfigService);
+  await app.init();
   const nextServer = createServer({
-    dev: configService.get<string>('NODE_ENV') !== 'production',
+    dev: config.NODE_ENV !== 'production',
     dir: './src/client',
   });
   await nextServer.prepare();
