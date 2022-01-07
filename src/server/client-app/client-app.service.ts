@@ -4,7 +4,7 @@ import { IncomingMessage, ServerResponse } from 'http';
 import createServer, { NextServer } from 'next/dist/server/next';
 
 @Injectable()
-export class AppService {
+export class ClientAppService {
   private nextServer: NextServer;
 
   constructor(private configService: ConfigService) {}

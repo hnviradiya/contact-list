@@ -1,10 +1,10 @@
 import { Controller, Get, Req, Res } from '@nestjs/common';
 import { IncomingMessage, ServerResponse } from 'http';
-import { AppService } from './app.service';
+import { ClientAppService } from './client-app.service';
 
 @Controller('/')
-export class AppController {
-  constructor(private readonly appService: AppService) {}
+export class ClientAppController {
+  constructor(private readonly appService: ClientAppService) {}
 
   @Get('*')
   async getApp(@Req() req: IncomingMessage, @Res() res: ServerResponse) {
