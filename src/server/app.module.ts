@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ApiModule } from './api/api.module';
 import { RouterModule } from '@nestjs/core';
 import { ContactListModule } from './api/contact-list/contact-list.module';
@@ -9,6 +9,7 @@ import { ClientAppModule } from './client-app/client-app.module';
   imports: [
     ApiModule,
     ClientAppModule,
+    ConfigModule.forRoot(),
     RouterModule.register([
       {
         path: 'api',
