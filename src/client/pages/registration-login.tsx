@@ -3,6 +3,7 @@ import { Content, Footer, Header } from 'antd/lib/layout/layout';
 import React from 'react';
 import styles from '../styles/registration-login.module.css';
 import homeStyles from '../styles/home.module.css';
+import Axios from 'axios';
 
 class RegistrationLogin extends React.Component {
   onFinish = (values: any) => {
@@ -11,6 +12,10 @@ class RegistrationLogin extends React.Component {
 
   onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
+  };
+
+  onRegisterClick = async () => {
+    await Axios.post('/user/create');
   };
 
   validateMessages = {
@@ -104,7 +109,11 @@ class RegistrationLogin extends React.Component {
                     <Form.Item
                       wrapperCol={{ ...this.layout.wrapperCol, offset: 8 }}
                     >
-                      <Button type="primary" htmlType="submit">
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        onClick={this.onRegisterClick}
+                      >
                         Create Account
                       </Button>
                     </Form.Item>

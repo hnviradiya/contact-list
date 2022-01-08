@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { ContactListModule } from './contact-list/contact-list.module';
+import { ContactModule } from './contact/contact.module';
 
 @Module({
-  imports: [ContactListModule],
+  imports: [ContactModule],
 })
 export class ApiModule {}

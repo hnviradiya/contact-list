@@ -1,9 +1,8 @@
-import { Button, Col, Form, Input, InputNumber, Layout, Row, Select, Table } from 'antd';
+import { Button, Col, Form, Input, Layout, Row, Select, Table } from 'antd';
 import { Content, Footer, Header } from 'antd/lib/layout/layout';
-import Sider from 'antd/lib/layout/Sider';
 import React from 'react';
-import styles from '../styles/registration-login.module.css';
 import homeStyles from '../styles/home.module.css';
+import styles from '../styles/registration-login.module.css';
 const { Option } = Select;
 
 class ContactList extends React.Component {

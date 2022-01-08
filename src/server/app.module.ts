@@ -2,9 +2,12 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ApiModule } from './api/api.module';
 import { RouterModule } from '@nestjs/core';
-import { ContactListModule } from './api/contact-list/contact-list.module';
+import { ContactModule } from './api/contact/contact.module';
 import { ClientAppModule } from './client-app/client-app.module';
 import { AppService } from './app.service';
+import { UserService } from './api/user/user.service';
+import { UserController } from './api/user/user.controller';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -17,8 +20,12 @@ import { AppService } from './app.service';
         module: ApiModule,
         children: [
           {
-            path: 'contact-list',
-            module: ContactListModule,
+            path: 'contact',
+            module: ContactModule,
+          },
+          {
+            path: 'user',
+            module: UserModule,
           },
         ],
       },
@@ -27,8 +34,9 @@ import { AppService } from './app.service';
         module: ClientAppModule,
       },
     ]),
+    UserModule,
   ],
-  controllers: [],
-  providers: [ConfigService, AppService],
+  controllers: [UserController],
+  providers: [ConfigService, AppService, UserService],
 })
 export class AppModule {}

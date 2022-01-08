@@ -1,14 +1,14 @@
 import { Controller, Get } from '@nestjs/common';
 import { ObjectId } from 'mongoose';
 import { Contact } from 'src/model/contact';
-import { ContactListService } from './contact-list.service';
+import { ContactService } from './contact.service';
 
 @Controller()
-export class ContactListController {
-  constructor(private readonly contactListService: ContactListService) {}
+export class ContactController {
+  constructor(private readonly contactService: ContactService) {}
 
   @Get('/getContacts')
   async getContacts(userId: ObjectId): Promise<Contact[]> {
-    return await this.contactListService.getContacts(userId);
+    return await this.contactService.getContacts(userId);
   }
 }
