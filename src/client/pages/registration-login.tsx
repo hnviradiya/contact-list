@@ -44,7 +44,16 @@ class RegistrationLogin extends React.Component {
               <Form.Item
                 name={['user', 'email']}
                 label="Email"
-                rules={[{ type: 'email' }]}
+                rules={[
+                  {
+                    type: 'email',
+                    message: 'The input is not valid Email!',
+                  },
+                  {
+                    required: true,
+                    message: 'Please enter your Email!',
+                  },
+                ]}
               >
                 <Input />
               </Form.Item>
@@ -57,6 +66,34 @@ class RegistrationLogin extends React.Component {
               >
                 <Input.Password />
               </Form.Item>
+              <Form.Item
+                name="confirm"
+                label="Confirm Password"
+                dependencies={['password']}
+                hasFeedback
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please confirm your password!',
+                  },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue('password') === value) {
+                        return Promise.resolve();
+                      }
+
+                      return Promise.reject(
+                        new Error(
+                          'The two passwords that you entered do not match!',
+                        ),
+                      );
+                    },
+                  }),
+                ]}
+              >
+                <Input.Password />
+              </Form.Item>
+
               <Form.Item wrapperCol={{ ...this.layout.wrapperCol, offset: 8 }}>
                 <Button type="primary" htmlType="submit">
                   Submit
@@ -78,7 +115,14 @@ class RegistrationLogin extends React.Component {
                 label="Email"
                 name="email"
                 rules={[
-                  { required: true, message: 'Please enter your email!' },
+                  {
+                    type: 'email',
+                    message: 'The input is not valid Email!',
+                  },
+                  {
+                    required: true,
+                    message: 'Please enter your Email!',
+                  },
                 ]}
               >
                 <Input />
