@@ -1,18 +1,19 @@
 import { Controller, Get, Post } from '@nestjs/common';
 import { ObjectId } from 'mongoose';
-import { User, UserModel } from 'src/model/user';
+import { User } from '../../../model/user';
+import { UserService } from './user.service';
 
 @Controller()
 export class UserController {
+  constructor(private readonly userService: UserService) {}
+
   @Get('/create')
   async createUser(user: User): Promise<ObjectId> {
-    return (await UserModel.create(user)).id;
+    return await this.userService.createUser(user);
   }
 
   @Post('/login')
   async login(user: User): Promise<ObjectId> {
-    return (
-      await UserModel.findOne({ user: user.email, password: user.password })
-    ).id;
+    return await this.userService.login(user);
   }
 }

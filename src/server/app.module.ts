@@ -6,6 +6,7 @@ import { ContactModule } from './api/contact/contact.module';
 import { AppService } from './app.service';
 import { ClientAppModule } from './client-app/client-app.module';
 import { UserModule } from './api/user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { UserModule } from './api/user/user.module';
       },
     ]),
     UserModule,
+    AuthModule,
   ],
   providers: [ConfigService, AppService],
 })

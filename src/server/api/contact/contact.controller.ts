@@ -1,6 +1,6 @@
 import { Controller, Get, Post } from '@nestjs/common';
 import { ObjectId } from 'mongoose';
-import { Contact } from 'src/model/contact';
+import { Contact } from '../../../model/contact';
 import { ContactService } from './contact.service';
 
 @Controller()
