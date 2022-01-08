@@ -1,13 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { ApiModule } from './api/api.module';
 import { RouterModule } from '@nestjs/core';
+import { ApiModule } from './api/api.module';
 import { ContactModule } from './api/contact/contact.module';
-import { ClientAppModule } from './client-app/client-app.module';
 import { AppService } from './app.service';
-import { UserService } from './api/user/user.service';
-import { UserController } from './api/user/user.controller';
-import { UserModule } from './user/user.module';
+import { ClientAppModule } from './client-app/client-app.module';
+import { UserModule } from './api/user/user.module';
 
 @Module({
   imports: [
@@ -36,7 +34,6 @@ import { UserModule } from './user/user.module';
     ]),
     UserModule,
   ],
-  controllers: [UserController],
-  providers: [ConfigService, AppService, UserService],
+  providers: [ConfigService, AppService],
 })
 export class AppModule {}
