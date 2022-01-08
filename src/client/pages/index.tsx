@@ -1,9 +1,9 @@
-import { Button } from 'antd';
+import { Divider } from 'antd';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 
-import { Divider } from 'antd';
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
@@ -19,13 +19,11 @@ const Home: NextPage = () => {
         </h1>
 
         <p className={styles.description}>
-          Get started by clicking <Button type="primary">Contact List</Button>
+          Get started by clicking <Link href="/contact-list">Contact List</Link>
         </p>
 
         <div className={styles.grid}>
           <Divider>Technologies</Divider>
-
-
 
           <p>
             Technologies used in this project are Nest.Js, Next.Js, React,
