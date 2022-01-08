@@ -2,6 +2,7 @@ import { Button, Col, Form, Input, Layout, Row } from 'antd';
 import { Content, Footer, Header } from 'antd/lib/layout/layout';
 import React from 'react';
 import styles from '../styles/registration-login.module.css';
+import homeStyles from '../styles/home.module.css';
 
 class RegistrationLogin extends React.Component {
   onFinish = (values: any) => {
@@ -26,7 +27,7 @@ class RegistrationLogin extends React.Component {
     return (
       <Layout className="layout">
         <Header className={styles['site-layout-header']}>Contact List</Header>
-        <Content style={{ padding: '0 50px' }}>
+        <Content style={{ padding: '50px 50px' }}>
           <div className={styles['site-layout-content']}>
             <>
               <Row>
@@ -160,7 +161,9 @@ class RegistrationLogin extends React.Component {
             </>
           </div>
         </Content>
-        <Footer>Made with ❤ by Hardik Viradiya</Footer>
+        <Footer className={homeStyles.footer}>
+          Made with ❤ by Hardik Viradiya
+        </Footer>
       </Layout>
     );
   }

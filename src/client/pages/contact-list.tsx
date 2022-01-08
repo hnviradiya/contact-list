@@ -1,8 +1,9 @@
-import { Button, Form, Input, InputNumber, Layout, Select, Table } from 'antd';
-import { Footer, Header } from 'antd/lib/layout/layout';
+import { Button, Col, Form, Input, InputNumber, Layout, Row, Select, Table } from 'antd';
+import { Content, Footer, Header } from 'antd/lib/layout/layout';
 import Sider from 'antd/lib/layout/Sider';
 import React from 'react';
 import styles from '../styles/registration-login.module.css';
+import homeStyles from '../styles/home.module.css';
 const { Option } = Select;
 
 class ContactList extends React.Component {
@@ -91,101 +92,90 @@ class ContactList extends React.Component {
 
   render() {
     return (
-      <Layout>
-        <Header>Contact List</Header>
-        <Layout>
-          <Sider>
-            {' '}
-            <Form
-              {...this.formItemLayout}
-              name="register"
-              onFinish={this.onFinish}
-              initialValues={{
-                residence: ['zhejiang', 'hangzhou', 'xihu'],
-                prefix: '86',
-              }}
-              scrollToFirstError
-            >
-              <Form.Item
-                name="name"
-                label="Full Name"
-                tooltip="What do you want call him?"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please enter name!',
-                    whitespace: true,
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
+      <Layout className="layout">
+        <Header className={styles['site-layout-header']}>Contact List</Header>
+        <Content>
+          <div className={styles['site-layout-no-pad-content']}>
+            <>
+              <Row gutter={16}>
+                <Col span={8}>
+                  <Form
+                    {...this.formItemLayout}
+                    name="register"
+                    onFinish={this.onFinish}
+                    initialValues={{
+                      residence: ['zhejiang', 'hangzhou', 'xihu'],
+                      prefix: '86',
+                    }}
+                    scrollToFirstError
+                  >
+                    <Form.Item
+                      name="name"
+                      label="Full Name"
+                      tooltip="What do you want to call him?"
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Please enter name!',
+                          whitespace: true,
+                        },
+                      ]}
+                    >
+                      <Input />
+                    </Form.Item>
 
-              <Form.Item
-                name="email"
-                label="E-mail"
-                rules={[
-                  {
-                    type: 'email',
-                    message: 'The input is not valid E-mail!',
-                  },
-                  {
-                    required: true,
-                    message: 'Please enter your E-mail!',
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
+                    <Form.Item
+                      name="email"
+                      label="E-mail"
+                      rules={[
+                        {
+                          type: 'email',
+                          message: 'The input is not valid E-mail!',
+                        },
+                        {
+                          required: true,
+                          message: 'Please enter your E-mail!',
+                        },
+                      ]}
+                    >
+                      <Input />
+                    </Form.Item>
 
-              <Form.Item
-                name="phone"
-                label="Phone Number"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please enter your phone number!',
-                  },
-                ]}
-              >
-                <Input
-                  addonBefore={this.prefixSelector}
-                  style={{
-                    width: '100%',
-                  }}
-                />
-              </Form.Item>
+                    <Form.Item
+                      name="phone"
+                      label="Phone Number"
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Please enter your phone number!',
+                        },
+                      ]}
+                    >
+                      <Input
+                        addonBefore={this.prefixSelector}
+                        style={{
+                          width: '100%',
+                        }}
+                      />
+                    </Form.Item>
 
-              <Form.Item
-                name="donation"
-                label="Donation"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please input donation amount!',
-                  },
-                ]}
-              >
-                <InputNumber
-                  addonAfter={this.suffixSelector}
-                  style={{
-                    width: '100%',
-                  }}
-                />
-              </Form.Item>
-
-              <Form.Item {...this.tailFormItemLayout}>
-                <Button type="primary" htmlType="submit">
-                  Register
-                </Button>
-              </Form.Item>
-            </Form>
-          </Sider>
-          <Sider>
-            <Table columns={this.columns} dataSource={this.data} />
-          </Sider>
-        </Layout>
-        <Footer>Copyright (c) 2021-present, Hardik Viradiya</Footer>
+                    <Form.Item {...this.tailFormItemLayout}>
+                      <Button type="primary" htmlType="submit">
+                        Add Contact
+                      </Button>
+                    </Form.Item>
+                  </Form>
+                </Col>
+                <Col span={16}>
+                  <Table columns={this.columns} dataSource={this.data} />
+                </Col>
+              </Row>
+            </>
+          </div>
+        </Content>
+        <Footer className={homeStyles.footer}>
+          Copyright (c) 2021-Present, Hardik Viradiya
+        </Footer>
       </Layout>
     );
   }

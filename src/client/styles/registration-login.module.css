@@ -1,8 +1,15 @@
 .site-layout-content {
   min-height: 280px;
-  padding: 24px;
+  padding: 75px;
   background: #fff;
 }
+
+.site-layout-no-pad-content {
+  min-height: 280px;
+  padding-top: 50px;
+  background: #fff;
+}
+
 #components-layout-demo-top .logo {
   float: left;
   width: 120px;
