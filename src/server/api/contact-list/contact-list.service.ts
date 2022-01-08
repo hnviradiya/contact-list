@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
+import { ObjectId } from 'mongoose';
+import { Contact, ContactModel } from 'src/model/contact';
 
 @Injectable()
 export class ContactListService {
-  getContacts(): Array<any> {
-    return ['Hardik Viradiya'];
+  async getContacts(userId: ObjectId): Promise<Contact[]> {
+    return await ContactModel.find({ userId });
   }
 }
