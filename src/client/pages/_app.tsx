@@ -1,7 +1,8 @@
-import App, { AppContext, AppInitialProps, AppProps } from 'next/app';
+import App, { AppProps } from 'next/app';
 import React from 'react';
 import { wrapper } from '../state/store';
 import '../styles/globals.css';
+import 'antd/dist/antd.css';
 
 class MyApp extends React.Component<AppProps> {
   public static getInitialProps = wrapper.getInitialAppProps(
