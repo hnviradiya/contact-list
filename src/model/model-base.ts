@@ -1,5 +1,13 @@
+import { modelOptions, Severity } from '@typegoose/typegoose';
 import { ObjectId } from 'mongoose';
 
+export const defaultOptions = {
+  options: {
+    allowMixed: Severity.ALLOW,
+  },
+};
+
+@modelOptions(defaultOptions)
 export class ModelBase {
   _id?: ObjectId;
 

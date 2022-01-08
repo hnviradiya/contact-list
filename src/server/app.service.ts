@@ -4,7 +4,6 @@ import { connect } from 'mongoose';
 
 @Injectable()
 export class AppService {
-
   constructor(private configService: ConfigService) {}
 
   async onModuleInit(): Promise<void> {

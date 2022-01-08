@@ -4,6 +4,7 @@ import { ApiModule } from './api/api.module';
 import { RouterModule } from '@nestjs/core';
 import { ContactListModule } from './api/contact-list/contact-list.module';
 import { ClientAppModule } from './client-app/client-app.module';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -28,6 +29,6 @@ import { ClientAppModule } from './client-app/client-app.module';
     ]),
   ],
   controllers: [],
-  providers: [ConfigService],
+  providers: [ConfigService, AppService],
 })
 export class AppModule {}
