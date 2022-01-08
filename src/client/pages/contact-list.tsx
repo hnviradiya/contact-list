@@ -2,6 +2,7 @@ import { Button, Form, Input, InputNumber, Layout, Select, Table } from 'antd';
 import { Footer, Header } from 'antd/lib/layout/layout';
 import Sider from 'antd/lib/layout/Sider';
 import React from 'react';
+import styles from '../styles/registration-login.module.css';
 const { Option } = Select;
 
 class ContactList extends React.Component {
