@@ -7,4 +7,7 @@ export class ContactService {
   async getContacts(userId: ObjectId): Promise<Contact[]> {
     return await ContactModel.find({ userId });
   }
+  async createContact(contact: Contact): Promise<ObjectId> {
+    return (await ContactModel.create(contact)).id;
+  }
 }

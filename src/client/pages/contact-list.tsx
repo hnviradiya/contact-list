@@ -1,5 +1,6 @@
 import { Button, Col, Form, Input, Layout, Row, Select, Table } from 'antd';
 import { Content, Footer, Header } from 'antd/lib/layout/layout';
+import axios from 'axios';
 import React from 'react';
 import homeStyles from '../styles/home.module.css';
 import styles from '../styles/registration-login.module.css';
@@ -59,8 +60,12 @@ class ContactList extends React.Component {
     },
   };
 
-  onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
+  onFinish = async (data: any) => {
+    const createdContact = await axios.post('/api/contact/create', {
+      data,
+    });
+
+    data.push(createdContact);
   };
 
   prefixSelector = (

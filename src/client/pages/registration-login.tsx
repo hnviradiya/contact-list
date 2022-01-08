@@ -3,19 +3,30 @@ import { Content, Footer, Header } from 'antd/lib/layout/layout';
 import React from 'react';
 import styles from '../styles/registration-login.module.css';
 import homeStyles from '../styles/home.module.css';
-import Axios from 'axios';
+import axios from 'axios';
+import { useRouter } from 'next/router';
+
+const baseUserUrl = '/api/user';
 
 class RegistrationLogin extends React.Component {
-  onFinish = (values: any) => {
-    console.log('Success:', values);
+  onLoginFormFinish = async (data: any) => {
+    const loginDetails = await axios.post(`${baseUserUrl}/login`, {
+      data,
+    });
+
+    useRouter().push('/');
+  };
+
+  onRegistrationFormFinish = async (data: any) => {
+    const userId = await axios.post(`${baseUserUrl}/create`, {
+      data,
+    });
+
+    useRouter().push('/');
   };
 
   onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
-  };
-
-  onRegisterClick = async () => {
-    await Axios.post('/user/create');
   };
 
   validateMessages = {
@@ -40,7 +51,7 @@ class RegistrationLogin extends React.Component {
                   <Form
                     {...this.layout}
                     name="nest-messages"
-                    onFinish={this.onFinish}
+                    onFinish={this.onRegistrationFormFinish}
                     validateMessages={this.validateMessages}
                   >
                     <Form.Item
@@ -109,11 +120,7 @@ class RegistrationLogin extends React.Component {
                     <Form.Item
                       wrapperCol={{ ...this.layout.wrapperCol, offset: 8 }}
                     >
-                      <Button
-                        type="primary"
-                        htmlType="submit"
-                        onClick={this.onRegisterClick}
-                      >
+                      <Button type="primary" htmlType="submit">
                         Create Account
                       </Button>
                     </Form.Item>
@@ -125,7 +132,7 @@ class RegistrationLogin extends React.Component {
                     labelCol={{ span: 8 }}
                     wrapperCol={{ span: 16 }}
                     initialValues={{ remember: true }}
-                    onFinish={this.onFinish}
+                    onFinish={this.onLoginFormFinish}
                     onFinishFailed={this.onFinishFailed}
                     autoComplete="off"
                   >
