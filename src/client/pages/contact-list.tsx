@@ -1,6 +1,6 @@
 import { Button, Col, Form, Input, Layout, Row, Select, Table } from 'antd';
 import { Content, Footer, Header } from 'antd/lib/layout/layout';
-import React from 'react';
+import React, { useEffect } from 'react';
 import homeStyles from '../styles/home.module.css';
 import styles from '../styles/registration-login.module.css';
 import { apiService } from './api/api.service';
@@ -66,9 +66,15 @@ const ContactList = (): JSX.Element => {
     data.push(createdContact);
   };
 
+  useEffect(() => {
+    (async () => {
+      getContacts();
+    })();
+  }, []);
+
   const getContacts = async () => {
-    const userId = '';
-    data = await apiService.get('api/contact/get', userId);
+    const userId = '61dab10ef4879990b1ae7ca6';
+    data = await apiService.get('api/contact/get', { userId });
   };
 
   const prefixSelector = (

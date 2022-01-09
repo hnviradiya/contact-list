@@ -12,7 +12,7 @@ export class apiService {
   }
 
   static async get(url: string, params: any) {
-    const { data, status } = await axios.get(url, params);
+    const { data, status } = await axios.get(url, { params });
     if (status === 302) {
       window.location.href = '/registration-login';
       return;
