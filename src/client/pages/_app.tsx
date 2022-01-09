@@ -1,30 +1,11 @@
-import App, { AppProps } from 'next/app';
-import React from 'react';
+import 'antd/dist/antd.css';
+import { AppProps } from 'next/app';
+import React, { FC } from 'react';
 import { wrapper } from '../state/store';
 import '../styles/globals.css';
-import 'antd/dist/antd.css';
 
-class MyApp extends React.Component<AppProps> {
-  public static getInitialProps = wrapper.getInitialAppProps(
-    (store) => async (context) => {
-      // Keep in mind that this will be called twice on server, one for page and second for error page
-      store.dispatch({ type: 'APP', payload: 'was set in _app' });
+const WrappedApp: FC<AppProps> = ({ Component, pageProps }) => (
+  <Component {...pageProps} />
+);
 
-      return {
-        pageProps: {
-          // https://nextjs.org/docs/advanced-features/custom-app#caveats
-          ...(await App.getInitialProps(context)).pageProps,
-          // Some custom thing for all pages
-          appProp: context.ctx.pathname,
-        },
-      };
-    },
-  );
-
-  render() {
-    const { Component, pageProps } = this.props;
-    return <Component {...pageProps} />;
-  }
-}
-
-export default wrapper.withRedux(MyApp);
+export default wrapper.withRedux(WrappedApp);
