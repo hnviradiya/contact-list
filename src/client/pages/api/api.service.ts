@@ -2,12 +2,21 @@
 import axios from 'axios';
 
 export class apiService {
-  static async post(url: string, data: any) {
-    const response = await axios.post(url, data);
-    if (response.status === 302) {
+  static async post(url: string, params: any) {
+    const { data, status } = await axios.post(url, params);
+    if (status === 302) {
       window.location.href = '/registration-login';
       return;
     }
-    return response;
+    return data;
+  }
+
+  static async get(url: string, params: any) {
+    const { data, status } = await axios.get(url, params);
+    if (status === 302) {
+      window.location.href = '/registration-login';
+      return;
+    }
+    return data;
   }
 }

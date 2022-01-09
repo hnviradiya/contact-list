@@ -1,9 +1,9 @@
 import { Button, Col, Form, Input, Layout, Row, Select, Table } from 'antd';
 import { Content, Footer, Header } from 'antd/lib/layout/layout';
-import axios from 'axios';
 import React from 'react';
 import homeStyles from '../styles/home.module.css';
 import styles from '../styles/registration-login.module.css';
+import { apiService } from './api/api.service';
 const { Option } = Select;
 
 const ContactList = (): JSX.Element => {
@@ -26,7 +26,7 @@ const ContactList = (): JSX.Element => {
     },
   ];
 
-  const data: any[] = [];
+  let data: any[] = [];
 
   const formItemLayout = {
     labelCol: {
@@ -61,9 +61,14 @@ const ContactList = (): JSX.Element => {
   };
 
   const onFinish = async (contactData: any) => {
-    const createdContact = await axios.post('/api/contact/create', contactData);
+    const createdContact = apiService.post('/api/contact/create', contactData);
 
     data.push(createdContact);
+  };
+
+  const getContacts = async () => {
+    const userId = '';
+    data = await apiService.get('api/contact/get', userId);
   };
 
   const prefixSelector = (

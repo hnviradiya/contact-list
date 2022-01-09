@@ -20,6 +20,6 @@ export class AuthController {
         domain: 'localhost', // your domain here!
         expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
       })
-      .send({ success: true });
+      .send(request.user);
   }
 }
