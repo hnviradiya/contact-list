@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { RouterModule } from '@nestjs/core';
+import { APP_FILTER, RouterModule } from '@nestjs/core';
 import { ApiModule } from './api/api.module';
 import { ContactModule } from './api/contact/contact.module';
 import { AppService } from './app.service';
 import { ClientAppModule } from './client-app/client-app.module';
 import { UserModule } from './api/user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { HttpExceptionFilter } from './exceptions/http-exception.filter';
 
 @Module({
   imports: [
@@ -36,6 +37,13 @@ import { AuthModule } from './auth/auth.module';
     UserModule,
     AuthModule,
   ],
-  providers: [ConfigService, AppService],
+  providers: [
+    ConfigService,
+    AppService,
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
+    },
+  ],
 })
 export class AppModule {}
