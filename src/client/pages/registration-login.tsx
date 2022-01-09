@@ -61,7 +61,7 @@ const RegistrationLogin = (): JSX.Element => {
                     <Input />
                   </Form.Item>
                   <Form.Item
-                    name="username"
+                    name="email"
                     label="Email"
                     rules={[
                       {
@@ -135,7 +135,7 @@ const RegistrationLogin = (): JSX.Element => {
                 >
                   <Form.Item
                     label="Email"
-                    name="email"
+                    name="username"
                     rules={[
                       {
                         type: 'email',
