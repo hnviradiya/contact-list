@@ -1,5 +1,6 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { ObjectId } from 'mongoose';
+import { Public } from '../../auth/jwt-auth.guard';
 import { User } from '../../../model/user';
 import { UserService } from './user.service';
 
@@ -7,13 +8,9 @@ import { UserService } from './user.service';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Get('/create')
-  async createUser(user: User): Promise<ObjectId> {
+  @Public()
+  @Post('/create')
+  async createUser(@Body() user: User): Promise<ObjectId> {
     return await this.userService.createUser(user);
-  }
-
-  @Post('/login')
-  async login(user: User): Promise<ObjectId> {
-    return await this.userService.login(user);
   }
 }

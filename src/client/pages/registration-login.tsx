@@ -10,7 +10,7 @@ const baseUserUrl = '/api/user';
 
 class RegistrationLogin extends React.Component {
   onLoginFormFinish = async (data: any) => {
-    const loginDetails = await axios.post(`${baseUserUrl}/login`, {
+    const loginDetails = await axios.post('auth/login', {
       data,
     });
 
