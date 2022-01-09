@@ -14,7 +14,7 @@ export class ClientAppController {
   }
 
   @Public()
-  @Get('/_next/static/*')
+  @Get('/_next/*')
   async getStaticContent(
     @Req() req: IncomingMessage,
     @Res() res: ServerResponse,
