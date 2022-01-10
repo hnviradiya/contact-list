@@ -21,13 +21,10 @@ const RegistrationLogin = (): JSX.Element => {
 
   const onRegistrationFormFinish = async (data: any) => {
     await axios.post(`${baseUserUrl}/create`, data);
-
-    message.success({
-      content: 'User created successfully. Please login to continue...',
-    });
+    message.success('User created successfully. Please login to continue...');
   };
 
-  const onFinishFailed = (errorInfo: any) => {
+  const onFormValidationFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
 
@@ -53,6 +50,7 @@ const RegistrationLogin = (): JSX.Element => {
                   {...layout}
                   name="nest-messages"
                   onFinish={onRegistrationFormFinish}
+                  onFinishFailed={onFormValidationFailed}
                   validateMessages={validateMessages}
                 >
                   <Form.Item
@@ -132,7 +130,7 @@ const RegistrationLogin = (): JSX.Element => {
                   wrapperCol={{ span: 16 }}
                   initialValues={{ remember: true }}
                   onFinish={onLoginFormFinish}
-                  onFinishFailed={onFinishFailed}
+                  onFinishFailed={onFormValidationFailed}
                   autoComplete="off"
                 >
                   <Form.Item

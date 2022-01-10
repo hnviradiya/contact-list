@@ -16,4 +16,9 @@ export class ContactController {
   async createContact(@Body() contact: Contact): Promise<ObjectId> {
     return await this.contactService.createContact(contact);
   }
+
+  @Post('/delete')
+  async deleteContact(@Body() contactId: ObjectId): Promise<boolean> {
+    return await this.contactService.deleteContact(contactId);
+  }
 }

@@ -1,5 +1,17 @@
-import { Button, Col, Form, Input, Layout, Row, Select, Table } from 'antd';
+import {
+  Button,
+  Col,
+  Form,
+  Input,
+  Layout,
+  message,
+  Popconfirm,
+  Row,
+  Select,
+  Table,
+} from 'antd';
 import { Content, Footer, Header } from 'antd/lib/layout/layout';
+import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Cookies from 'universal-cookie';
@@ -31,6 +43,18 @@ const ContactList = (): JSX.Element => {
       title: 'Phone Number',
       dataIndex: 'phone',
       key: 'phone',
+    },
+    {
+      title: 'Delete',
+      dataIndex: '_id',
+      render: (text: any, record: { _id: any }) => (
+        <Popconfirm
+          title="Sure to delete?"
+          onConfirm={() => deleteContact(record._id)}
+        >
+          <a>Delete</a>
+        </Popconfirm>
+      ),
     },
   ];
 
@@ -72,12 +96,6 @@ const ContactList = (): JSX.Element => {
     return userId || cookies.get('userId');
   };
 
-  const onFinish = async (contactData: any) => {
-    contactData.userId = getUserId();
-    await apiService.post('/api/contact/create', contactData);
-    await getContacts();
-  };
-
   useEffect(() => {
     (async () => {
       if (userId) {
@@ -90,12 +108,29 @@ const ContactList = (): JSX.Element => {
     })();
   }, []);
 
+  const onFormValidationFailed = (errorInfo: ValidateErrorEntity<any>) => {
+    message.error(errorInfo.errorFields[0].errors);
+  };
+
   const getContacts = async () => {
     setState(
       await apiService.get('api/contact/get', {
         userId: getUserId(),
       }),
     );
+  };
+
+  const createContact = async (contactData: any) => {
+    contactData.userId = getUserId();
+    await apiService.post('/api/contact/create', contactData);
+    message.success('Contact added successfully.');
+    await getContacts();
+  };
+
+  const deleteContact = async (contactId: any) => {
+    await apiService.post('/api/contact/delete', contactId);
+    message.success('Contact deleted successfully.');
+    await getContacts();
   };
 
   const prefixSelector = (
@@ -122,7 +157,8 @@ const ContactList = (): JSX.Element => {
                 <Form
                   {...formItemLayout}
                   name="register"
-                  onFinish={onFinish}
+                  onFinish={createContact}
+                  onFinishFailed={onFormValidationFailed}
                   initialValues={{
                     residence: ['zhejiang', 'hangzhou', 'xihu'],
                     prefix: '86',

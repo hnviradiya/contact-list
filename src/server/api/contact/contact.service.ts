@@ -10,4 +10,7 @@ export class ContactService {
   async createContact(contact: Contact): Promise<ObjectId> {
     return (await ContactModel.create(contact)).id;
   }
+  async deleteContact(contactId: ObjectId): Promise<boolean> {
+    return (await ContactModel.deleteOne(contactId)).acknowledged;
+  }
 }
