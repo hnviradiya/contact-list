@@ -2,6 +2,7 @@ import { Button, Col, Form, Input, Layout, Row, Select, Table } from 'antd';
 import { Content, Footer, Header } from 'antd/lib/layout/layout';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import Cookies from 'universal-cookie';
 import homeStyles from '../styles/home.module.css';
 import styles from '../styles/registration-login.module.css';
 import { RootState } from '../_redux/reducers/rootReducer';
@@ -9,6 +10,8 @@ import { apiService } from './api/api.service';
 const { Option } = Select;
 
 const ContactList = (): JSX.Element => {
+  const cookies = new Cookies();
+
   const columns = [
     {
       title: 'Full Name',
@@ -62,24 +65,27 @@ const ContactList = (): JSX.Element => {
     },
   };
 
-  const { pending, userId, error } = useSelector(
-    (state: RootState) => state.auth,
-  );
+  const { userId } = useSelector((state: RootState) => state.auth);
+
+  const getUserId = (): string => {
+    return userId || cookies.get('myCat');
+  };
 
   const onFinish = async (contactData: any) => {
-    const createdContact = apiService.post('/api/contact/create', userId);
-
+    contactData.userId = getUserId();
+    const createdContact = apiService.post('/api/contact/create', contactData);
     data.push(createdContact);
   };
 
   useEffect(() => {
     (async () => {
+      cookies.set('userId', userId, { path: '/' });
       getContacts();
     })();
   }, []);
 
   const getContacts = async () => {
-    data = await apiService.get('api/contact/get', { userId: posts });
+    data = await apiService.get('api/contact/get', { userId: getUserId() });
   };
 
   const prefixSelector = (
