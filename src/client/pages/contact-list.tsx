@@ -68,7 +68,7 @@ const ContactList = (): JSX.Element => {
   const { userId } = useSelector((state: RootState) => state.auth);
 
   const getUserId = (): string => {
-    return userId || cookies.get('myCat');
+    return userId || cookies.get('userId');
   };
 
   const onFinish = async (contactData: any) => {
@@ -79,12 +79,18 @@ const ContactList = (): JSX.Element => {
 
   useEffect(() => {
     (async () => {
-      cookies.set('userId', userId, { path: '/' });
+      if (userId) {
+        cookies.set('userId', userId, {
+          path: '/',
+          expires: new Date(Date.now() + 2592000),
+        });
+      }
       getContacts();
     })();
   }, []);
 
   const getContacts = async () => {
+    debugger;
     data = await apiService.get('api/contact/get', { userId: getUserId() });
   };
 

@@ -1,12 +1,11 @@
 import { Button, Col, Form, Input, Layout, message, Row } from 'antd';
 import { Content, Footer, Header } from 'antd/lib/layout/layout';
-import React, { useEffect } from 'react';
-import styles from '../styles/registration-login.module.css';
-import homeStyles from '../styles/home.module.css';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchPostsRequest } from '../_redux/actions/postsActions/postsActions';
+import homeStyles from '../styles/home.module.css';
+import styles from '../styles/registration-login.module.css';
 import { authLoginRequest } from '../_redux/actions/authActions/authActions';
 
 const baseUserUrl = '/api/user';
@@ -17,7 +16,6 @@ const RegistrationLogin = (): JSX.Element => {
 
   const onLoginFormFinish = async (data: any) => {
     dispatch(authLoginRequest(data));
-
     router.push('/');
   };
 
