@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { fetchPostsRequest } from '../_redux/actions/postsActions/postsActions';
+import { authLoginRequest } from '../_redux/actions/authActions/authActions';
 
 const baseUserUrl = '/api/user';
 
@@ -15,14 +16,10 @@ const RegistrationLogin = (): JSX.Element => {
   const dispatch = useDispatch();
 
   const onLoginFormFinish = async (data: any) => {
-    const loginDetails = await axios.post('auth/login', data);
+    dispatch(authLoginRequest(data));
 
     router.push('/');
   };
-
-  useEffect(() => {
-    dispatch(fetchPostsRequest());
-  }, []);
 
   const onRegistrationFormFinish = async (data: any) => {
     await axios.post(`${baseUserUrl}/create`, data);

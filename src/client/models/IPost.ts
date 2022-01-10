@@ -4,3 +4,7 @@ export interface IPost {
   title: string;
   completed: boolean;
 }
+
+export interface IAuth {
+  userId: number;
+}

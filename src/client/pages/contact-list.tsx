@@ -62,14 +62,12 @@ const ContactList = (): JSX.Element => {
     },
   };
 
-  const { pending, posts, error } = useSelector(
-    (state: RootState) => state.posts,
+  const { pending, userId, error } = useSelector(
+    (state: RootState) => state.auth,
   );
 
   const onFinish = async (contactData: any) => {
-    contactData.userId = posts;
-
-    const createdContact = apiService.post('/api/contact/create', contactData);
+    const createdContact = apiService.post('/api/contact/create', userId);
 
     data.push(createdContact);
   };
