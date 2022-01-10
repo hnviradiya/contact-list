@@ -2,23 +2,19 @@ import {
   Button,
   Col,
   Form,
-  Input,
-  Layout,
-  message,
+  Input, message,
   Popconfirm,
   Row,
   Select,
-  Table,
+  Table
 } from 'antd';
-import { Content, Footer, Header } from 'antd/lib/layout/layout';
 import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Cookies from 'universal-cookie';
-import homeStyles from '../styles/home.module.css';
-import styles from '../styles/registration-login.module.css';
 import { RootState } from '../_redux/reducers/rootReducer';
 import { apiService } from './api/api.service';
+import CommonHeader from './header';
 const { Option } = Select;
 
 const ContactList = (): JSX.Element => {
@@ -147,92 +143,82 @@ const ContactList = (): JSX.Element => {
   );
 
   return (
-    <Layout className="layout">
-      <Header className={styles['site-layout-header']}>Contact List</Header>
-      <Content>
-        <div className={styles['site-layout-no-pad-content']}>
-          <>
-            <Row gutter={16}>
-              <Col span={8}>
-                <Form
-                  {...formItemLayout}
-                  name="register"
-                  onFinish={createContact}
-                  onFinishFailed={onFormValidationFailed}
-                  initialValues={{
-                    residence: ['zhejiang', 'hangzhou', 'xihu'],
-                    prefix: '86',
-                  }}
-                  scrollToFirstError
-                >
-                  <Form.Item
-                    name="name"
-                    label="Full Name"
-                    tooltip="What do you want to call him?"
-                    rules={[
-                      {
-                        required: true,
-                        message: 'Please enter name!',
-                        whitespace: true,
-                      },
-                    ]}
-                  >
-                    <Input />
-                  </Form.Item>
+    <CommonHeader>
+      <Row gutter={16}>
+        <Col span={8}>
+          <Form
+            {...formItemLayout}
+            name="register"
+            onFinish={createContact}
+            onFinishFailed={onFormValidationFailed}
+            initialValues={{
+              residence: ['zhejiang', 'hangzhou', 'xihu'],
+              prefix: '86',
+            }}
+            scrollToFirstError
+          >
+            <Form.Item
+              name="name"
+              label="Full Name"
+              tooltip="What do you want to call him?"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please enter name!',
+                  whitespace: true,
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
 
-                  <Form.Item
-                    name="email"
-                    label="E-mail"
-                    rules={[
-                      {
-                        type: 'email',
-                        message: 'The input is not valid E-mail!',
-                      },
-                      {
-                        required: true,
-                        message: 'Please enter your E-mail!',
-                      },
-                    ]}
-                  >
-                    <Input />
-                  </Form.Item>
+            <Form.Item
+              name="email"
+              label="E-mail"
+              rules={[
+                {
+                  type: 'email',
+                  message: 'The input is not valid E-mail!',
+                },
+                {
+                  required: true,
+                  message: 'Please enter your E-mail!',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
 
-                  <Form.Item
-                    name="phone"
-                    label="Phone Number"
-                    rules={[
-                      {
-                        required: true,
-                        message: 'Please enter your phone number!',
-                      },
-                    ]}
-                  >
-                    <Input
-                      addonBefore={prefixSelector}
-                      style={{
-                        width: '100%',
-                      }}
-                    />
-                  </Form.Item>
+            <Form.Item
+              name="phone"
+              label="Phone Number"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please enter your phone number!',
+                },
+              ]}
+            >
+              <Input
+                addonBefore={prefixSelector}
+                style={{
+                  width: '100%',
+                }}
+              />
+            </Form.Item>
 
-                  <Form.Item {...tailFormItemLayout}>
-                    <Button type="primary" htmlType="submit">
-                      Add Contact
-                    </Button>
-                  </Form.Item>
-                </Form>
-              </Col>
-              <Col span={16}>
-                <Table columns={columns} dataSource={state} />
-              </Col>
-            </Row>
-          </>
-        </div>
-      </Content>
-      <Footer className={homeStyles.footer}>
-        Copyright (c) 2021-Present, Hardik Viradiya
-      </Footer>
-    </Layout>
+            <Form.Item {...tailFormItemLayout}>
+              <Button type="primary" htmlType="submit">
+                Add Contact
+              </Button>
+            </Form.Item>
+          </Form>
+        </Col>
+        <Col span={16}>
+          <Table columns={columns} dataSource={state} />
+        </Col>
+      </Row>
+    </CommonHeader>
   );
 };
 
