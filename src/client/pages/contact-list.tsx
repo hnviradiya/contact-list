@@ -1,6 +1,6 @@
 import { Button, Col, Form, Input, Layout, Row, Select, Table } from 'antd';
 import { Content, Footer, Header } from 'antd/lib/layout/layout';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Cookies from 'universal-cookie';
 import homeStyles from '../styles/home.module.css';
@@ -11,6 +11,9 @@ const { Option } = Select;
 
 const ContactList = (): JSX.Element => {
   const cookies = new Cookies();
+  const defaultData: any[] = [];
+  const [state, setState]: [any[], (state: any[]) => void] =
+    useState(defaultData);
 
   const columns = [
     {
@@ -30,8 +33,6 @@ const ContactList = (): JSX.Element => {
       key: 'phone',
     },
   ];
-
-  let data: any[] = [];
 
   const formItemLayout = {
     labelCol: {
@@ -73,8 +74,8 @@ const ContactList = (): JSX.Element => {
 
   const onFinish = async (contactData: any) => {
     contactData.userId = getUserId();
-    const createdContact = apiService.post('/api/contact/create', contactData);
-    data.push(createdContact);
+    await apiService.post('/api/contact/create', contactData);
+    await getContacts();
   };
 
   useEffect(() => {
@@ -90,8 +91,11 @@ const ContactList = (): JSX.Element => {
   }, []);
 
   const getContacts = async () => {
-    debugger;
-    data = await apiService.get('api/contact/get', { userId: getUserId() });
+    setState(
+      await apiService.get('api/contact/get', {
+        userId: getUserId(),
+      }),
+    );
   };
 
   const prefixSelector = (
@@ -183,7 +187,7 @@ const ContactList = (): JSX.Element => {
                 </Form>
               </Col>
               <Col span={16}>
-                <Table columns={columns} dataSource={data} />
+                <Table columns={columns} dataSource={state} />
               </Col>
             </Row>
           </>
