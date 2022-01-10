@@ -62,12 +62,11 @@ const ContactList = (): JSX.Element => {
     },
   };
 
+  const { pending, posts, error } = useSelector(
+    (state: RootState) => state.posts,
+  );
+
   const onFinish = async (contactData: any) => {
-
-    const { pending, posts, error } = useSelector(
-      (state: RootState) => state.posts,
-    );
-
     contactData.userId = posts;
 
     const createdContact = apiService.post('/api/contact/create', contactData);
@@ -82,10 +81,6 @@ const ContactList = (): JSX.Element => {
   }, []);
 
   const getContacts = async () => {
-    const { pending, posts, error } = useSelector(
-      (state: RootState) => state.posts,
-    );
-
     data = await apiService.get('api/contact/get', { userId: posts });
   };
 
