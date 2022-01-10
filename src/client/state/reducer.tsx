@@ -1,18 +1,18 @@
 import { AnyAction } from 'redux';
 
 export interface State {
-  loggedIn: boolean;
+  userId?: string | null;
 }
 
 export const loginReducer = (
-  state: State = { loggedIn: false },
+  state: State = { userId: null },
   action: AnyAction,
 ) => {
   switch (action.type) {
     case 'login':
-      return { loggedIn: true };
+      return { userId: state.userId };
     case 'logout':
-      return { loggedIn: false };
+      return { userId: null };
     default:
       return state;
   }

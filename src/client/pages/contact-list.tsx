@@ -1,8 +1,10 @@
 import { Button, Col, Form, Input, Layout, Row, Select, Table } from 'antd';
 import { Content, Footer, Header } from 'antd/lib/layout/layout';
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import homeStyles from '../styles/home.module.css';
 import styles from '../styles/registration-login.module.css';
+import { RootState } from '../_redux/reducers/rootReducer';
 import { apiService } from './api/api.service';
 const { Option } = Select;
 
@@ -61,6 +63,13 @@ const ContactList = (): JSX.Element => {
   };
 
   const onFinish = async (contactData: any) => {
+
+    const { pending, posts, error } = useSelector(
+      (state: RootState) => state.posts,
+    );
+
+    contactData.userId = posts;
+
     const createdContact = apiService.post('/api/contact/create', contactData);
 
     data.push(createdContact);
@@ -73,8 +82,11 @@ const ContactList = (): JSX.Element => {
   }, []);
 
   const getContacts = async () => {
-    const userId = '61dab10ef4879990b1ae7ca6';
-    data = await apiService.get('api/contact/get', { userId });
+    const { pending, posts, error } = useSelector(
+      (state: RootState) => state.posts,
+    );
+
+    data = await apiService.get('api/contact/get', { userId: posts });
   };
 
   const prefixSelector = (

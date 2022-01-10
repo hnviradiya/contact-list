@@ -1,21 +1,28 @@
 import { Button, Col, Form, Input, Layout, message, Row } from 'antd';
 import { Content, Footer, Header } from 'antd/lib/layout/layout';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from '../styles/registration-login.module.css';
 import homeStyles from '../styles/home.module.css';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { fetchPostsRequest } from '../_redux/actions/postsActions/postsActions';
 
 const baseUserUrl = '/api/user';
 
 const RegistrationLogin = (): JSX.Element => {
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const onLoginFormFinish = async (data: any) => {
     const loginDetails = await axios.post('auth/login', data);
 
     router.push('/');
   };
+
+  useEffect(() => {
+    dispatch(fetchPostsRequest());
+  }, []);
 
   const onRegistrationFormFinish = async (data: any) => {
     await axios.post(`${baseUserUrl}/create`, data);
