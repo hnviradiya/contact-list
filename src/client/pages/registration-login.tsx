@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import homeStyles from '../styles/home.module.css';
 import styles from '../styles/registration-login.module.css';
 import { authLoginRequest } from '../_redux/actions/authActions/authActions';
+import { apiService } from './api/api.service';
 
 const baseUserUrl = '/api/user';
 
@@ -15,8 +16,13 @@ const RegistrationLogin = (): JSX.Element => {
   const dispatch = useDispatch();
 
   const onLoginFormFinish = async (data: any) => {
-    dispatch(authLoginRequest(data));
-    router.push('/');
+    const { id } = await apiService.post('auth/login', data);
+    if (id) {
+      dispatch(authLoginRequest(data));
+      router.push('/');
+    } else {
+      message.error('Authentication failed.');
+    }
   };
 
   const onRegistrationFormFinish = async (data: any) => {
@@ -25,7 +31,7 @@ const RegistrationLogin = (): JSX.Element => {
   };
 
   const onFormValidationFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
+    message.error(errorInfo.errorFields[0].errors);
   };
 
   const validateMessages = {
