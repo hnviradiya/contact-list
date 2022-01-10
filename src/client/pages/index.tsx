@@ -2,9 +2,28 @@ import { Divider } from 'antd';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import styles from '../styles/Home.module.css';
+import { RootState } from '../_redux/reducers/rootReducer';
+import Cookies from 'universal-cookie';
 
 const Home: NextPage = () => {
+  const cookies = new Cookies();
+
+  const { userId } = useSelector((state: RootState) => state.auth);
+
+  useEffect(() => {
+    (async () => {
+      if (userId) {
+        cookies.set('userId', userId, {
+          path: '/',
+          expires: new Date(Date.now() + 2592000),
+        });
+      }
+    })();
+  }, []);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -19,7 +38,10 @@ const Home: NextPage = () => {
         </h1>
 
         <p className={styles.description}>
-          Get started by clicking <Link href="/contact-list">Contact List</Link>
+          Get started by clicking{' '}
+          <a className={styles.linkdescription}>
+            <Link href="/contact-list">Contact List</Link>
+          </a>
         </p>
 
         <div className={styles.grid}>

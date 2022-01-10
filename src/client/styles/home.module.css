@@ -56,6 +56,10 @@
   font-size: 1.5rem;
 }
 
+a.linkdescription  {
+  color: #096dd9 !important;
+}
+
 .code {
   background: #fafafa;
   border-radius: 5px;
@@ -106,6 +110,15 @@
 .logo {
   height: 1em;
   margin-left: 0.5rem;
+}
+
+.signout {
+  height: 100%;
+  float: right;
+}
+
+.main-content {
+  padding: '50px 50px';
 }
 
 @media (max-width: 600px) {

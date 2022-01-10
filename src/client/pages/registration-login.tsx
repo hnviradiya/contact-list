@@ -164,7 +164,7 @@ const RegistrationLogin = (): JSX.Element => {
 
             <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
               <Button type="primary" htmlType="submit">
-                Sign In
+                Sign in
               </Button>
             </Form.Item>
           </Form>

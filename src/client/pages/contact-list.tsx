@@ -2,11 +2,12 @@ import {
   Button,
   Col,
   Form,
-  Input, message,
+  Input,
+  message,
   Popconfirm,
   Row,
   Select,
-  Table
+  Table,
 } from 'antd';
 import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
 import React, { useEffect, useState } from 'react';
