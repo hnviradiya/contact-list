@@ -3,6 +3,8 @@ Contact list for registered users
 
 **Description:** Project is developed using Node.js with Nest.js, Next.js, Typescript, React, Redux Saga, Ant Design, MongoDB, Mongoose, Typegoose
 
+**Note:** This is sample project which uses password storage in plain text (till I update code to use desired method). In production it is not recommended. Use hashing with salt to store password.
+
 To run this project
 
 1) Open `contact-list.code-workspace` in vs code
