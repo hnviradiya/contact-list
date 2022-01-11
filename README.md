@@ -5,7 +5,7 @@ Contact list for registered users
 
 To run this project
 
-1) Open **contact-list.code-workspace** in vs code
+1) Open `contact-list.code-workspace` in vs code
 2) execute `npm i` in vs code terminal
 3) Make sure MongoDB is up and running. Default localhost connection is being used. If you want to connect any other database you can update `.env` file's `MONGO_URI` variable.
 4) Hit F5.
