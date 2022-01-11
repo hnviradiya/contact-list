@@ -11,6 +11,10 @@ export class UserController {
   @Public()
   @Post('/create')
   async createUser(@Body() user: User): Promise<ObjectId> {
+    if (await this.userService.findOne(user.email)) {
+      return null;
+    }
+
     return await this.userService.createUser(user);
   }
 }

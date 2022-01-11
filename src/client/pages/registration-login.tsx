@@ -1,12 +1,10 @@
 import { Button, Col, Form, Input, message, Row } from 'antd';
-import axios from 'axios';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { authLoginRequest } from '../_redux/actions/authActions/authActions';
 import { apiService } from './api/api.service';
 import CommonHeader from './header';
-const baseUserUrl = '/api/user';
 
 const RegistrationLogin = (): JSX.Element => {
   const router = useRouter();
@@ -23,8 +21,11 @@ const RegistrationLogin = (): JSX.Element => {
   };
 
   const onRegistrationFormFinish = async (data: any) => {
-    await axios.post(`${baseUserUrl}/create`, data);
-    message.success('User created successfully. Please login to continue...');
+    if (await apiService.post('/api/user/create', data)) {
+      message.success('User created successfully. Please login to continue...');
+    } else {
+      message.info('User with this email already exists.');
+    }
   };
 
   const onFormValidationFailed = (errorInfo: any) => {
