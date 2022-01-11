@@ -120,6 +120,7 @@ const ContactList = (): JSX.Element => {
 
   const createContact = async (contactData: any) => {
     contactData.userId = getUserId();
+    contactData.phone = `+${contactData.prefix}${contactData.phone}`;
     await apiService.post('/api/contact/create', contactData);
     message.success('Contact added successfully.');
     await getContacts();
