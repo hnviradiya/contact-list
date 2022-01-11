@@ -3,6 +3,7 @@ import {
   Col,
   Form,
   Input,
+  InputNumber,
   message,
   Popconfirm,
   Row,
@@ -137,8 +138,8 @@ const ContactList = (): JSX.Element => {
           width: 70,
         }}
       >
-        <Option value="86">+86</Option>
-        <Option value="87">+87</Option>
+        <Option value="91">+91</Option>
+        <Option value="1">+1</Option>
       </Select>
     </Form.Item>
   );
@@ -153,8 +154,7 @@ const ContactList = (): JSX.Element => {
             onFinish={createContact}
             onFinishFailed={onFormValidationFailed}
             initialValues={{
-              residence: ['zhejiang', 'hangzhou', 'xihu'],
-              prefix: '86',
+              prefix: '91',
             }}
             scrollToFirstError
           >
@@ -200,8 +200,10 @@ const ContactList = (): JSX.Element => {
                 },
               ]}
             >
-              <Input
+              <InputNumber
                 addonBefore={prefixSelector}
+                min={1000000000}
+                max={9999999999}
                 style={{
                   width: '100%',
                 }}
