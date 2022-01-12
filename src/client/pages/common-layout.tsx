@@ -4,8 +4,13 @@ import homeStyles from '../styles/home.module.css';
 import styles from '../styles/registration-login.module.css';
 import Cookies from 'universal-cookie';
 import { useRouter } from 'next/router';
+import React, { ReactChild, ReactChildren } from 'react';
 
-const CommonLayout = ({ children }): JSX.Element => {
+interface AuxProps {
+  children: ReactChild | ReactChildren;
+}
+
+const CommonLayout = ({ children }: AuxProps): JSX.Element => {
   const cookies = new Cookies();
   const router = useRouter();
 
