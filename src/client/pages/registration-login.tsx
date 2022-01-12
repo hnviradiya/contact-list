@@ -4,7 +4,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { authLoginRequest } from '../_redux/actions/authActions/authActions';
 import { apiService } from '../api/api.service';
-import CommonHeader from './header';
+import CommonLayout from './common-layout';
 
 const RegistrationLogin = (): JSX.Element => {
   const router = useRouter();
@@ -43,7 +43,7 @@ const RegistrationLogin = (): JSX.Element => {
   };
 
   return (
-    <CommonHeader>
+    <CommonLayout>
       <Row>
         <Col span={12}>
           <Form
@@ -171,7 +171,7 @@ const RegistrationLogin = (): JSX.Element => {
           </Form>
         </Col>
       </Row>
-    </CommonHeader>
+    </CommonLayout>
   );
 };
 

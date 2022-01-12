@@ -16,7 +16,7 @@ import { useSelector } from 'react-redux';
 import Cookies from 'universal-cookie';
 import { RootState } from '../_redux/reducers/rootReducer';
 import { apiService } from '../api/api.service';
-import CommonHeader from './header';
+import CommonLayout from './common-layout';
 const { Option } = Select;
 
 const ContactList = (): JSX.Element => {
@@ -146,7 +146,7 @@ const ContactList = (): JSX.Element => {
   );
 
   return (
-    <CommonHeader>
+    <CommonLayout>
       <Row gutter={16}>
         <Col span={8}>
           <Form
@@ -222,7 +222,7 @@ const ContactList = (): JSX.Element => {
           <Table columns={columns} dataSource={state} />
         </Col>
       </Row>
-    </CommonHeader>
+    </CommonLayout>
   );
 };
 

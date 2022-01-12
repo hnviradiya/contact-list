@@ -5,7 +5,7 @@ import styles from '../styles/registration-login.module.css';
 import Cookies from 'universal-cookie';
 import { useRouter } from 'next/router';
 
-const CommonHeader = ({ children }): JSX.Element => {
+const CommonLayout = ({ children }): JSX.Element => {
   const cookies = new Cookies();
   const router = useRouter();
 
@@ -46,4 +46,4 @@ const CommonHeader = ({ children }): JSX.Element => {
   );
 };
 
-export default CommonHeader;
+export default CommonLayout;
