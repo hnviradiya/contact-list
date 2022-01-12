@@ -15,7 +15,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Cookies from 'universal-cookie';
 import { RootState } from '../_redux/reducers/rootReducer';
-import { apiService } from './api/api.service';
+import { apiService } from '../api/api.service';
 import CommonHeader from './header';
 const { Option } = Select;
 

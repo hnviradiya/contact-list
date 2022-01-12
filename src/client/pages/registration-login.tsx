@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { authLoginRequest } from '../_redux/actions/authActions/authActions';
-import { apiService } from './api/api.service';
+import { apiService } from '../api/api.service';
 import CommonHeader from './header';
 
 const RegistrationLogin = (): JSX.Element => {

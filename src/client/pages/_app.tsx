@@ -2,7 +2,6 @@ import 'antd/dist/antd.css';
 import { AppProps } from 'next/app';
 import React, { FC } from 'react';
 import { Provider } from 'react-redux';
-import { wrapper } from '../state/store';
 import '../styles/globals.css';
 import store from '../_redux/store';
 
@@ -12,4 +11,4 @@ const App: FC<AppProps> = ({ Component, pageProps }) => (
   </Provider>
 );
 
-export default wrapper.withRedux(App);
+export default App;
